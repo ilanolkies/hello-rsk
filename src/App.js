@@ -90,7 +90,7 @@ class App extends Component {
           <h1>Hello RSK!</h1>
           <p>Using a smart contract.</p>
           <div>
-            <p>Greeting: <b>{getting ? '...' : greeting}</b></p>
+            <p>Greeting: <b>{getting ? '...' : greeting}</b> (<a onClick={this.getGreeting}>reload</a>)</p>
           </div>
           <form onSubmit={this.setGreeting}>
             <input
