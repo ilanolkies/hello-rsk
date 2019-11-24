@@ -6,15 +6,18 @@
   height: 40vmin;
 }
 
-.App-header, .App-body {
+.App-header, .App-body, .App-footer {
   background-color: #00b43c;
-  min-height: 100vh;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.App-header, .App-body {
+  display: flex;
+  min-height: 100vh;
 }
 
 .App-link {
