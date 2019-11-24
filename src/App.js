@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
+import { BarLoader } from 'react-spinners';
 import helloRSKAbi from './HelloRSKAbi';
 import logo from './logo.svg';
 import './App.css';
@@ -18,6 +19,8 @@ class App extends Component {
       greeting: null,
       value: '',
       setting: false,
+      error: null,
+      receipt: null,
     };
 
     this.getGreeting = this.getGreeting.bind(this);
@@ -47,7 +50,7 @@ class App extends Component {
 
   setGreeting (event) {
     event.preventDefault();
-    this.setState({ setting: true });
+    this.setState({ setting: true, receipt: null, error: null });
 
     const { value } = this.state;
 
@@ -56,10 +59,10 @@ class App extends Component {
 
     window.web3.currentProvider.enable()
     .then(accounts => helloRSK.methods.setGreeting(value).send({ from: accounts[0] }))
-    .then(console.log)
-    .catch(console.error);
-
-    this.setState({ setting: false });
+    .then(receipt => this.setState({ receipt }))
+    .catch(error => this.setState({ error }))
+    .then(() => this.setState({ setting: false }))
+    .then(this.getGreeting);
   }
 
   render () {
@@ -67,8 +70,12 @@ class App extends Component {
       greeting,
       getting,
       value,
-      setting
+      setting,
+      error,
+      receipt,
     } = this.state;
+
+    console.log(receipt)
 
     return (
       <div className="App">
@@ -98,7 +105,12 @@ class App extends Component {
               <a href="https://chrome.google.com/webstore/detail/nifty-wallet/jbdaocneiiinmjbjlgalhcelgbejmnid" target="_blank" rel="noopener noreferrer">Get Nifty!</a> :
               <input type="submit" value="setGreeting()" className="Greeting-submit" disabled={!window.web3 || setting} />
             }
+            {setting && <BarLoader color="#f26122" width={300} />}
           </form>
+          <div>
+            {error && `Error: ${error.message}`}
+            {receipt && <a href={`https://explorer.testnet.rsk.co/tx/${receipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{receipt.transactionHash}</a>}
+          </div>
         </main>
         <footer className="App-footer">
           Find the smart contract <a href="https://explorer.testnet.rsk.co/address/0x0fb49bb37ba4b0186a87c866a2bbd29e1ef378da" target="_blank" rel="noopener noreferrer">here</a>
