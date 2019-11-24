@@ -8,17 +8,21 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Welcome to the Internet of Value!
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <hr />
+      <main className="App-body">
+        <h1>Hello RSK!</h1>
+        <p>Using a smart contract.</p>
+        <div>
+          <p>Greeting: <b>...</b></p>
+        </div>
+        <form >
+          <input type="text" className="Greeting-input" />
+          <button type="submit" className="Greeting-submit">setGreeting()</button>
+        </form>
+      </main>
     </div>
   );
 }

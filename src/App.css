@@ -6,8 +6,8 @@
   height: 40vmin;
 }
 
-.App-header {
-  background-color: #282c34;
+.App-header, .App-body {
+  background-color: #00b43c;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -19,4 +19,23 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.Greeting-input {
+  padding: 5px 15px;
+  font-size: 11px;
+  border-radius: 30px;
+  text-decoration: none;
+  box-sizing: border-box;
+  width: 200px;
+}
+
+.Greeting-submit {
+  background-color: #f26122;
+  padding: 5px 15px;
+  font-size: 11px;
+  border-radius: 30px;
+  color: #fff;
+  text-decoration: none;
+  box-sizing: border-box;
 }
