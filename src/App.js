@@ -5,41 +5,21 @@ import helloRSKAbi from './HelloRSKAbi';
 import { HelloRSK as helloRSKAddress } from './contracts.testnet';
 import logo from './logo.svg';
 import './App.css';
-
-const node = 'https://public-node.testnet.rsk.co';
+import { GetGreeting } from './components';
 
 class App extends Component {
   constructor (props) {
     super(props);
 
     this.state = {
-      getting: false,
-      greeting: null,
       value: '',
       setting: false,
       error: null,
       receipt: null,
     };
 
-    this.getGreeting = this.getGreeting.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.setGreeting = this.setGreeting.bind(this);
-  }
-
-  componentDidMount () {
-    this.getGreeting();
-  }
-
-  getGreeting () {
-    this.setState({ getting: true });
-    const web3 = new Web3(node);
-
-    web3.eth.net.getId()
-    .then(id => {
-      if (id === 31 ) return new web3.eth.Contract(helloRSKAbi, helloRSKAddress);
-    })
-    .then(helloRSK => helloRSK.methods.getGreeting().call())
-    .then(greeting => this.setState({ greeting, getting: false }));
   }
 
   handleChange (event) {
@@ -60,21 +40,16 @@ class App extends Component {
     .then(accounts => helloRSK.methods.setGreeting(value).send({ from: accounts[0] }))
     .then(receipt => this.setState({ receipt }))
     .catch(error => this.setState({ error }))
-    .then(() => this.setState({ setting: false }))
-    .then(this.getGreeting);
+    .then(() => this.setState({ setting: false }));
   }
 
   render () {
     const {
-      greeting,
-      getting,
       value,
       setting,
       error,
       receipt,
     } = this.state;
-
-    console.log(receipt)
 
     return (
       <div className="App">
@@ -89,7 +64,7 @@ class App extends Component {
           <h1>Hello RSK!</h1>
           <p>Using a smart contract.</p>
           <div>
-            <p>Greeting: <b>{getting ? '...' : greeting}</b> (<a onClick={this.getGreeting}>reload</a>)</p>
+            <GetGreeting />
           </div>
           <form onSubmit={this.setGreeting}>
             <input
