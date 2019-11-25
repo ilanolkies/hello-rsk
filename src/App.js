@@ -2,13 +2,11 @@ import React, { Component } from 'react';
 import Web3 from 'web3';
 import { BarLoader } from 'react-spinners';
 import helloRSKAbi from './HelloRSKAbi';
+import { HelloRSK as helloRSKAddress } from './contracts.testnet';
 import logo from './logo.svg';
 import './App.css';
 
 const node = 'https://public-node.testnet.rsk.co';
-
-// https://explorer.testnet.rsk.co/address/0x0fb49bb37ba4b0186a87c866a2bbd29e1ef378da
-const helloRSKAddress = '0x0fb49bb37ba4b0186a87c866a2bbd29e1ef378da';
 
 class App extends Component {
   constructor (props) {
@@ -35,12 +33,13 @@ class App extends Component {
   getGreeting () {
     this.setState({ getting: true });
     const web3 = new Web3(node);
-    const helloRSK = new web3.eth.Contract(helloRSKAbi, helloRSKAddress);
 
-    helloRSK.methods.getGreeting().call()
-    .then(greeting => {
-      this.setState({ greeting, getting: false })
-    });
+    web3.eth.net.getId()
+    .then(id => {
+      if (id === 31 ) return new web3.eth.Contract(helloRSKAbi, helloRSKAddress);
+    })
+    .then(helloRSK => helloRSK.methods.getGreeting().call())
+    .then(greeting => this.setState({ greeting, getting: false }));
   }
 
   handleChange (event) {
