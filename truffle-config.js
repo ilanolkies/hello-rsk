@@ -18,6 +18,11 @@ module.exports = {
       port: 7545,
       network_id: 5777
     },
+    rskRegtest: {
+      host: '127.0.0.1',
+      port: 4444,
+      network_id: 33,
+    },
     rskTestnet: {
       provider: () => new HDWalletProvider(mnemonic, 'https://public-node.testnet.rsk.co', 0, 1, true, "m/44'/37310'/0'/0/"),
       network_id: 31,
