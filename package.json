@@ -19,7 +19,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "dev": "sh ./scripts/dev"
+    "dev": "sh ./scripts/dev",
+    "dev-rsk": "sh ./scripts/dev-rsk"
   },
   "eslintConfig": {
     "extends": "react-app"

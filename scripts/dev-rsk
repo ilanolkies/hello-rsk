@@ -1,0 +1,7 @@
+#!/bin/bash
+docker build -t rsksmart/rskj https://github.com/rsksmart/rskj.git -f - < docker/Dockerfile-rskj
+docker run -d --name rskj -e "miner.client.autoMine=true" rsksmart/rskj --regtest
+truffle deploy --network rskRegtest
+yarn start
+docker container stop /rskj
+docker container rm /rskj
