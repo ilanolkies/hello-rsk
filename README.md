@@ -26,7 +26,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 ### `yarn dev-rsk`
 
 Runs the app in the development mode together with a [rskj](https://github.com/rsksmart/rskj) environment.<br />
+
 Docker is a pre-requisite for running this option.
+Ensure no other instance of RSKj or any other program is using port 4444.
+
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### `yarn build`

@@ -23,6 +23,11 @@ module.exports = {
       port: 4444,
       network_id: 33,
     },
+    rskRegtestDocker: {
+      host: 'localhost',
+      port: 4444,
+      network_id: 33,
+    },
     rskTestnet: {
       provider: () => new HDWalletProvider(mnemonic, 'https://public-node.testnet.rsk.co', 0, 1, true, "m/44'/37310'/0'/0/"),
       network_id: 31,
