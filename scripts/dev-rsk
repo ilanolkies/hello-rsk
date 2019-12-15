@@ -1,0 +1,26 @@
+#!/bin/bash
+if  docker image ls | grep "regtest" 
+then
+echo 'Docker Image already exist'
+    if docker container ls -a | grep "regtest" 
+    then
+    echo 'RSKj Container already exist: Starting it. '
+    docker start regtest-node-01
+    else
+    echo 'RSKj Container dont exist: Starting it. '
+    docker run -d --name regtest-node-01  -p 4444:4444 -p 30305:30305 regtest
+    fi
+else
+echo 'Building Docker Image & Starting container'
+docker build -t regtest -f ./docker/Dockerfile-rskj ./docker/
+docker run -d --name regtest-node-01  -p 4444:4444 -p 30305:30305 regtest
+fi
+sleep 5
+until nc -z 127.0.0.1 4444
+                      do
+                        sleep 5
+                        echo "Waiting for RskJ..."
+                        sleep 5
+                      done
+truffle deploy --network rskRegtestDocker
+docker stop regtest-node-01

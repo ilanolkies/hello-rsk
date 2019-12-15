@@ -1,0 +1,7 @@
+#!/bin/bash
+ganache-cli --port 7545 --networkId 5777 &
+last_pid=$!
+truffle deploy --network ganache
+yarn start
+kill -KILL $last_pid
+
