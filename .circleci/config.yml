@@ -28,7 +28,8 @@ jobs:
                     sudo apt install build-essential
 
       
-      - run: Preapre hello-rsk
+      - run: 
+          name: Preapre hello-rsk
           command: |
                     npm install
                     
