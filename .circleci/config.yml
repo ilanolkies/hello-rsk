@@ -36,6 +36,7 @@ jobs:
       - run:
           name: Start RskJ & Deploy Contracts
           command: |
+                    npm install -g truffle
                     npm install
                     java -Dminer.client.autoMine=true -cp ~/rsksmart/rskj/rskj-core/build/libs/rskj-core-1.2.0-SNAPSHOT-all.jar co.rsk.Start --regtest  nohup &               
                     until nc -z 127.0.0.1 4444
